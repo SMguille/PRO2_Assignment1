@@ -2,17 +2,22 @@ package Model;
 
 public class BorrowedState implements VinylState
 {
-  @Override public void borrow()
+  @Override public void onReserve(Vinyl vinyl)
   {
 
   }
 
-  @Override public void delete()
+  @Override public void onBorrow(Vinyl vinyl)
   {
 
   }
 
-  @Override public void returnVinyl()
+  @Override public void onReturn(Vinyl vinyl)
+  {
+
+  }
+
+  @Override public void onRemove(Vinyl vinyl)
   {
 
   }

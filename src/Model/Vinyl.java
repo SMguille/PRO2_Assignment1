@@ -1,28 +1,42 @@
 package Model;
 
+import java.beans.PropertyChangeSupport;
+import java.util.List;
+
 public class Vinyl
-{ //A Vinyl has at least a title, artist, release year, and a lending state. The Vinyl can be in different states depending on availability.
-
-  // A Vinyl that is not borrowed, and has no reservation is said to be available.
-
-
+{
   private String title;
   private String artist;
   private int releaseYear;
-  private boolean state;
+  private VinylState availableState, borrowedState, reservedState, borrowedReservedState;
   private VinylState currentState;
+  private User user;
+  private List<Vinyl> vinylList;
+  private PropertyChangeSupport support;
 
-  public Vinyl(String title, String artist, int releaseYear,
-      boolean state)
+
+  public Vinyl(String title, String artist, int releaseYear)
   {
     this.title = title;
     this.artist = artist;
     this.releaseYear = releaseYear;
-    this.state = state;
+    currentState = availableState;
+
+    user = null;
+    support = new PropertyChangeSupport(this);
   }
 
   public void changeToAvailable(){
-
+    currentState = new AvailableState();;
+  }
+  public void changeToReserved(){
+    currentState = new ReservedState();
+  }
+  public void changeToBorrowed(){
+    currentState = new BorrowedState();
+  }
+  public void changeToBorrowedReserved(){
+    currentState = new BorrowedReservedState();
   }
 
   public String getTitle()
@@ -40,12 +54,32 @@ public class Vinyl
     return releaseYear;
   }
 
-  public void setState(Boolean lendingState){
-    this.state = lendingState;
+  public void setUser(User user){
+    this.user = user;
   }
 
-  public boolean isAvailable()
+  public void reserve(Vinyl vinyl)
   {
-    return state;
+    currentState.onReserve(this);;
+  }
+
+  public void borrow(Vinyl vinyl)
+  {
+    currentState.onBorrow(this);
+  }
+
+  public void onReturn(Vinyl vinyl)
+  {
+    currentState.onReturn(this);
+  }
+
+  public void remove(Vinyl vinyl)
+  {
+    currentState.onRemove(this);
+  }
+
+  public void removeFromList(Vinyl vinyl){
+    vinylList.remove(vinyl);
+    support.firePropertyChange("remove", null, vinylList); //Warning that the list has been changed
   }
 }

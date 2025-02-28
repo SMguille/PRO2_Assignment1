@@ -2,7 +2,9 @@ package Model;
 
 public interface VinylState
 {
-  void borrow();
-  void delete();
-  void returnVinyl();
+  void onReserve(Vinyl vinyl);
+  void onBorrow(Vinyl vinyl);
+  void onReturn(Vinyl vinyl);
+  void onRemove(Vinyl vinyl);
+
 }
