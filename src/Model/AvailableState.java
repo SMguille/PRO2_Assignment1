@@ -19,6 +19,6 @@ public class AvailableState implements VinylState
 
   @Override public void onRemove(Vinyl vinyl)
   {
-    vinyl.removeFromList(vinyl); //Remove the vinyl fomr the list. C
+    vinyl.removeFromList(vinyl); //Remove the vinyl from the list.
   }
 }

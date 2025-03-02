@@ -10,9 +10,9 @@ public class Vinyl
   private int releaseYear;
   private VinylState availableState, borrowedState, reservedState, borrowedReservedState;
   private VinylState currentState;
-  private User user;
+  private String borrowedUserId;
+  private String reservedUserId;
   private List<Vinyl> vinylList;
-  private PropertyChangeSupport support;
 
 
   public Vinyl(String title, String artist, int releaseYear)
@@ -22,8 +22,8 @@ public class Vinyl
     this.releaseYear = releaseYear;
     currentState = availableState;
 
-    user = null;
-    support = new PropertyChangeSupport(this);
+    borrowedUserId = null;
+    reservedUserId = null;
   }
 
   public void changeToAvailable(){
@@ -54,32 +54,49 @@ public class Vinyl
     return releaseYear;
   }
 
-  public void setUser(User user){
-    this.user = user;
+  public String getBorrowedUserId()
+  {
+    return borrowedUserId;
   }
 
-  public void reserve(Vinyl vinyl)
+  public String getReservedUserId()
+  {
+    return reservedUserId;
+  }
+  public VinylState getCurrentState(){
+    return currentState;
+  }
+
+  public void setBorrowedUserId(String borrowedUserId){
+    this.borrowedUserId = borrowedUserId;
+  }
+
+  public void setReservedUserId(String reservedUserId)
+  {
+    this.reservedUserId = reservedUserId;
+  }
+
+  public void reserve()
   {
     currentState.onReserve(this);;
   }
 
-  public void borrow(Vinyl vinyl)
+  public void borrow()
   {
     currentState.onBorrow(this);
   }
 
-  public void onReturn(Vinyl vinyl)
+  public void onReturn()
   {
     currentState.onReturn(this);
   }
 
-  public void remove(Vinyl vinyl)
+  public void remove()
   {
     currentState.onRemove(this);
   }
 
   public void removeFromList(Vinyl vinyl){
-    vinylList.remove(vinyl);
-    support.firePropertyChange("remove", null, vinylList); //Warning that the list has been changed
+
   }
 }
