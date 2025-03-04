@@ -4,7 +4,7 @@ public class BorrowedReservedState implements VinylState
 {
   @Override public void onReserve(Vinyl vinyl)
   {
-    //Nothing because it is already reserved
+    vinyl.changeToBorrowed(); //Cancel only the reservation
   }
 
   @Override public void onBorrow(Vinyl vinyl)
@@ -14,11 +14,15 @@ public class BorrowedReservedState implements VinylState
 
   @Override public void onReturn(Vinyl vinyl)
   {
-    vinyl.changeToBorrowed(); //Right now this works because there is no cancel reservation method
+    vinyl.changeToReserved();
   }
 
-  @Override public void onRemove(Vinyl vinyl)
+  @Override public String stateMessage(Vinyl vinyl)
   {
-    // It cannot be removed
+    return "Borrowed by " + vinyl.getBorrowedUserId() + " and reserved by " + vinyl.getReservedUserId();
+  }
+
+  @Override public String toString(){
+    return "BorrowedReservedState";
   }
 }

@@ -14,7 +14,7 @@ public class VinylListView
   private TableView<Vinyl> tableView;
 
   @FXML
-  private TableColumn<Vinyl, String> titleColumn;
+    private TableColumn<Vinyl, String> titleColumn;
 
   @FXML
   private TableColumn<Vinyl, String> idColumn;
@@ -22,8 +22,7 @@ public class VinylListView
   @FXML
   private TableColumn<Vinyl, String> releaseYearColumn;
 
-  @FXML
-  private TableColumn<Vinyl, String> stateColumn;
+  @FXML private TableColumn<Vinyl, String> stateColumn;
 
   @FXML
   private Button logInButton;
@@ -43,46 +42,52 @@ public class VinylListView
   @FXML
   private Label idLabel;
 
-  private VinylListViewModel listViewModel;
 
+  private ObservableList<Vinyl> vinylList = FXCollections.observableArrayList();
 
+  private VinylListViewModel vinylListViewModel;
+
+  public VinylListView(VinylListViewModel vinylListViewModel){
+    this.vinylListViewModel = vinylListViewModel;
+  }
 
   @FXML
   private void onLogIn() {
-    // Lógica para iniciar sesión
+    //Instead of this, I need to put the userID as a parameter in the methods.
+    //vinylListViewModel.logIn();
   }
 
   @FXML
   private void onReserve() {
-    listViewModel.reserveVinyl(tableView.getSelectionModel().getSelectedItem());
+    vinylListViewModel.reserveVinyl(tableView.getSelectionModel().getSelectedItem());
   }
 
   @FXML
-  private void onBorrow() {
-    listViewModel.borrowVinyl(tableView.getSelectionModel().getSelectedItem());
+  private void onBorrow(){
+    vinylListViewModel.borrowVinyl(tableView.getSelectionModel().getSelectedItem());
+  }
+  @FXML
+  private void onReturn(){
+    vinylListViewModel.returnVinyl(tableView.getSelectionModel().getSelectedItem());
   }
 
   @FXML
   private void onRemove() {
-    listViewModel.removeVinyl(tableView.getSelectionModel().getSelectedItem(), String.valueOf(idText));
+    vinylListViewModel.removeVinyl(tableView.getSelectionModel().getSelectedItem());
   }
-
-  private ObservableList<Vinyl> vinylList = FXCollections.observableArrayList();
 
   public void initialize() {
     // Asignar valores a las columnas
     titleColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getTitle()));
     idColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getArtist()));
     releaseYearColumn.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(data.getValue().getReleaseYear())));
-    //stateColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getState())); IMPLEMENT THIS LATER
+    stateColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().stateMessage()));
 
-    // Agregar datos de prueba
-    vinylList.add(new Vinyl("Abbey Road", "The Beatles", 1969));
-    vinylList.add(new Vinyl("Dark Side of the Moon", "Pink Floyd", 1973));
 
-    idText.textProperty().bindBidirectional(listViewModel.userIdProperty());
+    idText.textProperty().bindBidirectional(vinylListViewModel.userIdProperty());
 
-    tableView.setItems(listViewModel.getVinyls());
+    tableView.setItems(vinylListViewModel.getVinyls());
+
   }
 
 

@@ -5,7 +5,7 @@ public class ReservedState implements VinylState
 
   @Override public void onReserve(Vinyl vinyl)
   {
-    //Nothing because it is already reserved
+    //Nothing because it is already reserved (It changes to available if the user is the same in Model)
   }
 
   @Override public void onBorrow(Vinyl vinyl)
@@ -15,11 +15,15 @@ public class ReservedState implements VinylState
 
   @Override public void onReturn(Vinyl vinyl)
   {
-    //We should be able to unreserve the vinyl
+    //We should be able to unreserve the vinyl ( by clicking reserve again)
   }
 
-  @Override public void onRemove(Vinyl vinyl)
+  @Override public String stateMessage(Vinyl vinyl)
   {
-    //Nothing because it is reserved, possibly wait until available.
+    return "Reserved by " + vinyl.getReservedUserId();
+  }
+
+  @Override public String toString(){
+    return "ReservedState";
   }
 }

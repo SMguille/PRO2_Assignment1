@@ -17,8 +17,12 @@ public class BorrowedState implements VinylState
     vinyl.changeToAvailable();
   }
 
-  @Override public void onRemove(Vinyl vinyl)
+  @Override public String stateMessage(Vinyl vinyl)
   {
-    //Nothing because it is still borrowed
+    return "Borrowed by " + vinyl.getBorrowedUserId();
+  }
+
+  @Override public String toString(){
+    return "BorrowedState";
   }
 }

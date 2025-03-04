@@ -4,7 +4,7 @@ public class AvailableState implements VinylState
 {
   @Override public void onReserve(Vinyl vinyl)
   {
-    vinyl.changeToReserved();;
+    vinyl.changeToReserved();
   }
 
   @Override public void onBorrow(Vinyl vinyl)
@@ -17,8 +17,12 @@ public class AvailableState implements VinylState
     //Nothing because it is available
   }
 
-  @Override public void onRemove(Vinyl vinyl)
+  @Override public String stateMessage(Vinyl vinyl)
   {
-    vinyl.removeFromList(vinyl); //Remove the vinyl from the list.
+    return "Available";
+  }
+
+  @Override public String toString(){
+    return "AvailableState";
   }
 }

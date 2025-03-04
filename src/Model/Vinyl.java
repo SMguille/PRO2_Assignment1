@@ -20,13 +20,15 @@ public class Vinyl
     this.title = title;
     this.artist = artist;
     this.releaseYear = releaseYear;
-    currentState = availableState;
+    currentState = new AvailableState();
 
     borrowedUserId = null;
     reservedUserId = null;
   }
 
   public void changeToAvailable(){
+    borrowedUserId = null;
+    reservedUserId = null;
     currentState = new AvailableState();;
   }
   public void changeToReserved(){
@@ -78,7 +80,7 @@ public class Vinyl
 
   public void reserve()
   {
-    currentState.onReserve(this);;
+    currentState.onReserve(this);
   }
 
   public void borrow()
@@ -91,12 +93,25 @@ public class Vinyl
     currentState.onReturn(this);
   }
 
-  public void remove()
-  {
-    currentState.onRemove(this);
+  public String stateMessage(){
+    return currentState.stateMessage(this);
   }
 
-  public void removeFromList(Vinyl vinyl){
-
+  @Override public String toString()
+  {
+    final StringBuilder sb = new StringBuilder("Vinyl{");
+    sb.append("title='").append(title).append('\'');
+    sb.append(", artist='").append(artist).append('\'');
+    sb.append(", releaseYear=").append(releaseYear);
+    sb.append(", availableState=").append(availableState);
+    sb.append(", borrowedState=").append(borrowedState);
+    sb.append(", reservedState=").append(reservedState);
+    sb.append(", borrowedReservedState=").append(borrowedReservedState);
+    sb.append(", currentState=").append(currentState);
+    sb.append(", borrowedUserId='").append(borrowedUserId).append('\'');
+    sb.append(", reservedUserId='").append(reservedUserId).append('\'');
+    sb.append(", vinylList=").append(vinylList);
+    sb.append('}');
+    return sb.toString();
   }
 }

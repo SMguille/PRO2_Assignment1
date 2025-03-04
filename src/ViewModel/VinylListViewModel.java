@@ -21,8 +21,7 @@ public class VinylListViewModel
     this.model = model;
     this.userId = new SimpleStringProperty();
     vinyls = FXCollections.observableArrayList();
-    model.addPropertyChangeListener("VinylAdded", this::update);
-    model.addPropertyChangeListener("VinylRemoved", this::update);
+    model.addPropertyChangeListener("listChanged", this::update);
   }
 
   private void update(PropertyChangeEvent event)
@@ -39,17 +38,16 @@ public class VinylListViewModel
     return vinyls;
   }
 
-  public void removeVinyl(Vinyl vinyl, String removingUserId){
-    model.removeVinyl(vinyl, removingUserId);
+  public void removeVinyl(Vinyl vinyl){
+    model.removeVinyl(vinyl, userId.getValue());
   }
   public void reserveVinyl(Vinyl vinyl){
-    model.reserveVinyl(vinyl);
+    model.reserveVinyl(vinyl, userId.getValue());
   }
   public void borrowVinyl(Vinyl vinyl){
-    model.borrowVinyl(vinyl);
+    model.borrowVinyl(vinyl, userId.getValue());
   }
   public void returnVinyl(Vinyl vinyl){
-    model.returnVinyl(vinyl);
+    model.returnVinyl(vinyl, userId.getValue());
   }
-
 }

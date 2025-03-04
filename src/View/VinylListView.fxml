@@ -9,19 +9,20 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.VinylListView">
    <children>
-      <TableView layoutX="13.0" layoutY="14.0" prefHeight="374.0" prefWidth="495.0">
+      <TableView fx:id="tableView" layoutX="13.0" layoutY="14.0" prefHeight="374.0" prefWidth="495.0">
         <columns>
-          <TableColumn id="titleColumn" prefWidth="86.4000244140625" text="Title" />
-          <TableColumn id="idColumn" prefWidth="85.5999755859375" text="Artist" />
-            <TableColumn id="releaseYearColumn" prefWidth="95.20001220703125" text="Release Year" />
-            <TableColumn id="stateColumn" prefWidth="220.0" text="State" />
+          <TableColumn fx:id="titleColumn" prefWidth="114.4000244140625" text="Title" />
+          <TableColumn fx:id="idColumn" prefWidth="78.39996337890625" text="Artist" />
+            <TableColumn fx:id="releaseYearColumn" prefWidth="76.0" text="Release Year" />
+            <TableColumn fx:id="stateColumn" prefWidth="220.0" text="State" />
         </columns>
       </TableView>
       <Button layoutX="522.0" layoutY="77.0" mnemonicParsing="false" onAction="#onLogIn" prefHeight="32.0" prefWidth="59.0" text="Log in" />
       <Button layoutX="516.0" layoutY="135.0" mnemonicParsing="false" onAction="#onReserve" prefHeight="32.0" prefWidth="70.0" text="Reserve" />
-      <Button layoutX="516.0" layoutY="221.0" mnemonicParsing="false" onAction="#onRemove" prefHeight="32.0" prefWidth="70.0" text="Remove" />
+      <Button layoutX="516.0" layoutY="221.0" mnemonicParsing="false" onAction="#onReturn" prefHeight="32.0" prefWidth="70.0" text="Return" />
       <Button layoutX="516.0" layoutY="179.0" mnemonicParsing="false" onAction="#onBorrow" prefHeight="32.0" prefWidth="70.0" text="Borrow" />
       <TextField fx:id="idText" layoutX="508.0" layoutY="32.0" prefHeight="38.0" prefWidth="86.0" />
       <Label layoutX="545.0" layoutY="14.0" text="ID" />
+      <Button layoutX="516.0" layoutY="263.0" mnemonicParsing="false" onAction="#onRemove" prefHeight="32.0" prefWidth="70.0" text="Remove" />
    </children>
 </AnchorPane>
