@@ -20,7 +20,7 @@ public class Main extends Application
     ViewFactory viewFactory = new ViewFactory(viewModelFactory, primaryStage);
 
     viewFactory.getVinylListView();
-    //viewFactory.getUserListView(); --> CreateVinylView
+    viewFactory.getCreateVinylView();
 
   }
 }

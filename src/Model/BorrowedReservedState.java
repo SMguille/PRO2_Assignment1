@@ -9,7 +9,7 @@ public class BorrowedReservedState implements VinylState
 
   @Override public void onBorrow(Vinyl vinyl)
   {
-    //Nothing because it is already borrowed
+    //Nothing because is already reserved
   }
 
   @Override public void onReturn(Vinyl vinyl)

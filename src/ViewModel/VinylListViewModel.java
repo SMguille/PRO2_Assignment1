@@ -1,13 +1,18 @@
 package ViewModel;
 
+import Factory.ModelFactory;
+import Factory.ViewFactory;
+import Factory.ViewModelFactory;
 import Model.Model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import Model.Vinyl;
+import javafx.stage.Stage;
 
 import java.beans.PropertyChangeEvent;
+import java.io.IOException;
 import java.util.List;
 
 public class VinylListViewModel

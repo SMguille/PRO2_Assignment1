@@ -18,6 +18,10 @@ public class Model implements PropertyChangeSubject
     this.support = new PropertyChangeSupport(this);
     vinylList.add(new Vinyl("Abbey Road", "The Beatles", 1969));
     vinylList.add(new Vinyl("Dark Side of the Moon", "Pink Floyd", 1973));
+    vinylList.add(new Vinyl("Led Zeppelin IV", "Led Zeppelin", 1971));
+    vinylList.add(new Vinyl("Rumours", "Fleetwood Mac", 1977));
+    vinylList.add(new Vinyl("The Wall", "Pink Floyd", 1979));
+
   }
 
   public List<Vinyl> getVinylList()
@@ -39,7 +43,6 @@ public class Model implements PropertyChangeSubject
       vinylList.remove(vinyl); //Anyone or the user that has reserved the vinyl can remove a vinyl that is in the store (It is still in the shop so he cannot steal it)
       support.firePropertyChange("listChanged", null, vinylList);
     }
-    System.out.println(vinylList);
 }
 
   public void reserveVinyl(Vinyl vinyl, String userId){

@@ -1,6 +1,7 @@
 package Factory;
 
 import View.VinylListView;
+import View.CreateVinylView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -10,6 +11,7 @@ import java.io.IOException;
 public class ViewFactory
 {
   private VinylListView vinylListView;
+  private CreateVinylView createVinylView;
   private ViewModelFactory viewModelFactory;
 
   private final Stage primaryStage;
@@ -37,24 +39,23 @@ public class ViewFactory
     }
     return vinylListView;
   }
-/*
-  public CreateUserView getCreateUserView() throws IOException
-  {
-    if(createUserView == null)
-    {
-      fxmlLoader = new FXMLLoader(getClass().getResource("../CreateUser/CreateUserView.fxml"));
-      fxmlLoader.setControllerFactory(controllerClass -> new CreateUserView(viewModelFactory.getCreateUserViewModel()));
 
-      Scene userListScene = new Scene(fxmlLoader.load());
+  public CreateVinylView getCreateVinylView() throws IOException
+  {
+    if(createVinylView == null)
+    {
+      fxmlLoader = new FXMLLoader(getClass().getResource("../View/CreateVinylView.fxml"));
+      fxmlLoader.setControllerFactory(controllerClass -> new CreateVinylView(viewModelFactory.getCreateVinylViewModel()));
+
+      Scene createVinylScene = new Scene(fxmlLoader.load());
       Stage secondaryStage = new Stage();
-      secondaryStage.setTitle("Create User");
-      secondaryStage.setScene(userListScene);
+      secondaryStage.setTitle("Create Vinyl");
+      secondaryStage.setScene(createVinylScene);
       secondaryStage.show();
-      createUserView = fxmlLoader.getController();
+      createVinylView = fxmlLoader.getController();
     }
-    return createUserView;
+    return createVinylView;
   }
 
- */
 
 }
