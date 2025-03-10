@@ -33,7 +33,7 @@ public class User implements Runnable
 
       try
       {
-        Thread.sleep(random.nextInt(50) + 100);
+        Thread.sleep(random.nextInt(3000) + 1000);
       }
       catch (InterruptedException e)
       {

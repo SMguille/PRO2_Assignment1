@@ -21,6 +21,13 @@ public class BorrowedReservedState implements VinylState
   {
     return "Borrowed by " + vinyl.getBorrowedUserId() + " and reserved by " + vinyl.getReservedUserId();
   }
+/*
+  @Override public String deleteMessage(Vinyl vinyl)
+  {
+    return "Marked to be removed";
+  }
+
+ */
 
   @Override public String toString(){
     return "BorrowedReservedState";

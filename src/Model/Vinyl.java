@@ -10,7 +10,8 @@ public class Vinyl
   private VinylState currentState;
   private String borrowedUserId;
   private String reservedUserId;
-  private List<Vinyl> vinylList;
+  private String message= "(Marked to be removed)";
+  private boolean markedForRemoval;
 
 
   public Vinyl(String title, String artist, int releaseYear)
@@ -22,6 +23,7 @@ public class Vinyl
 
     borrowedUserId = null;
     reservedUserId = null;
+    markedForRemoval = false;
   }
 
   public void changeToAvailable(){
@@ -91,12 +93,16 @@ public class Vinyl
     currentState.onReturn(this);
   }
 
-  public void onDelete(Vinyl vinyl){
-    //currentState.onDelete(this);
+  public boolean isAvailableState(){
+    return currentState.toString().equals("AvailableState");
   }
 
   public String stateMessage(){
-    return currentState.stateMessage(this);
+    String returnText = currentState.stateMessage(this);
+    if (!this.isAvailableState() && markedForRemoval){
+      returnText += message;
+    }
+    return returnText;
   }
 
   @Override public String toString()
@@ -108,8 +114,12 @@ public class Vinyl
     sb.append(", currentState=").append(currentState);
     sb.append(", borrowedUserId='").append(borrowedUserId).append('\'');
     sb.append(", reservedUserId='").append(reservedUserId).append('\'');
-    sb.append(", vinylList=").append(vinylList);
     sb.append('}');
     return sb.toString();
+  }
+
+  public void setMarkedForRemoval(boolean markedForRemoval)
+  {
+    this.markedForRemoval = markedForRemoval;
   }
 }

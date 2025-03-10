@@ -9,7 +9,6 @@ import java.util.List;
 public class Model implements PropertyChangeSubject
 {
   private List<Vinyl> vinylList;
-  private User user;
   private PropertyChangeSupport support;
 
   public Model()
@@ -42,7 +41,9 @@ public class Model implements PropertyChangeSubject
       vinylList.remove(vinyl); //Anyone or the user that has reserved the vinyl can remove a vinyl that is in the store (It is still in the shop so he cannot steal it)
       support.firePropertyChange("listChanged", null, vinylList);
     }
-    vinyl.onDelete(vinyl);
+    else{
+      vinyl.setMarkedForRemoval(true);
+    }
 }
 
   public synchronized void reserveVinyl(Vinyl vinyl, String userId){

@@ -28,6 +28,14 @@ public class AvailableState implements VinylState
   {
     return "Available";
   }
+/*
+  @Override public String deleteMessage(Vinyl vinyl)
+  {
+    //Removed automatically
+    return "";
+  }
+
+ */
 
   @Override public String toString(){
     return "AvailableState";

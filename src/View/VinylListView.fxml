@@ -17,7 +17,6 @@
             <TableColumn fx:id="stateColumn" prefWidth="332.0000061035156" text="State" />
         </columns>
       </TableView>
-      <Button layoutX="638.0" layoutY="77.0" mnemonicParsing="false" onAction="#onLogIn" prefHeight="32.0" prefWidth="59.0" text="Log in" />
       <Button layoutX="632.0" layoutY="135.0" mnemonicParsing="false" onAction="#onReserve" prefHeight="32.0" prefWidth="70.0" text="Reserve" />
       <Button layoutX="632.0" layoutY="221.0" mnemonicParsing="false" onAction="#onReturn" prefHeight="32.0" prefWidth="70.0" text="Return" />
       <Button layoutX="632.0" layoutY="179.0" mnemonicParsing="false" onAction="#onBorrow" prefHeight="32.0" prefWidth="70.0" text="Borrow" />

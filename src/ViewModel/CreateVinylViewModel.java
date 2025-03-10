@@ -24,29 +24,14 @@ public class CreateVinylViewModel
         Integer.parseInt(releaseYear.getValue()));
   }
 
-  public String getReleaseYear()
-  {
-    return releaseYear.get();
-  }
-
   public StringProperty releaseYearProperty()
   {
     return releaseYear;
   }
 
-  public String getArtist()
-  {
-    return artist.get();
-  }
-
   public StringProperty artistProperty()
   {
     return artist;
-  }
-
-  public String getTitle()
-  {
-    return title.get();
   }
 
   public StringProperty titleProperty()

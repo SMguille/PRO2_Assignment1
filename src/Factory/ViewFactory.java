@@ -14,7 +14,7 @@ public class ViewFactory
   private CreateVinylView createVinylView;
   private ViewModelFactory viewModelFactory;
 
-  private final Stage primaryStage;
+  private Stage primaryStage;
   private FXMLLoader fxmlLoader;
 
 

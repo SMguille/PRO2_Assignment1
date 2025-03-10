@@ -27,36 +27,12 @@ public class VinylListView
   @FXML private TableColumn<Vinyl, String> stateColumn;
 
   @FXML
-  private Button logInButton;
-
-  @FXML
-  private Button reserveButton;
-
-  @FXML
-  private Button removeButton;
-
-  @FXML
-  private Button borrowButton;
-
-  @FXML
   private TextField idText;
-
-  @FXML
-  private Label idLabel;
-
-
-  private ObservableList<Vinyl> vinylList = FXCollections.observableArrayList();
 
   private VinylListViewModel vinylListViewModel;
 
   public VinylListView(VinylListViewModel vinylListViewModel){
     this.vinylListViewModel = vinylListViewModel;
-  }
-
-  @FXML
-  private void onLogIn() {
-    //Instead of this, I need to put the userID as a parameter in the methods.
-    //vinylListViewModel.logIn();
   }
 
   @FXML

@@ -33,7 +33,7 @@ public class Main extends Application
     List<Thread> threads = new ArrayList<>();
 
     // Number of users
-    int numUsers = 10;
+    int numUsers = 3;
 
     // Create users in a loop
     for (int i = 1; i <= numUsers; i++) {
