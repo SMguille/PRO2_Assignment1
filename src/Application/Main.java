@@ -4,8 +4,12 @@ import Factory.ModelFactory;
 import Factory.ViewFactory;
 import Factory.ViewModelFactory;
 import Model.User;
+import Model.Model;
 import javafx.application.Application;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends Application
 {
@@ -19,28 +23,46 @@ public class Main extends Application
     ModelFactory modelFactory = new ModelFactory();
     ViewModelFactory viewModelFactory = new ViewModelFactory(modelFactory);
     ViewFactory viewFactory = new ViewFactory(viewModelFactory, primaryStage);
-    
+
+    Model model = modelFactory.getModel();
+
     viewFactory.getVinylListView();
     viewFactory.getCreateVinylView();
 
-    User user1 = new User("1");
-    User user2 = new User("2");
-    User user3 = new User("3");
-    User user4 = new User("4");
+    List<User> userList = new ArrayList<>();
+    List<Thread> threads = new ArrayList<>();
 
-    Thread thread1 = new Thread(user1);
+    // Number of users
+    int numUsers = 10;
+
+    // Create users in a loop
+    for (int i = 1; i <= numUsers; i++) {
+      User user = new User("User " + i, model);
+      userList.add(user);
+
+      // Create a thread for each user
+      Thread thread = new Thread(user);
+      thread.setDaemon(true);
+      threads.add(thread);
+    }
+    for (Thread thread : threads){
+      thread.start();
+    }
+
+
+    /*
     Thread thread2 = new Thread(user2);
     Thread thread3 = new Thread(user3);
     Thread thread4 = new Thread(user4);
 
-    thread1.start();
+    thread2.setDaemon(true);
+    thread3.setDaemon(true);
+    thread4.setDaemon(true);
+
     thread2.start();
     thread3.start();
     thread4.start();
 
-    thread1.setDaemon(true);
-    thread2.setDaemon(true);
-    thread3.setDaemon(true);
-    thread4.setDaemon(true);
+     */
   }
 }

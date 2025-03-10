@@ -89,8 +89,5 @@ public class VinylListView
     idText.textProperty().bindBidirectional(vinylListViewModel.userIdProperty());
 
     tableView.setItems(vinylListViewModel.getVinyls());
-
   }
-
-
 }

@@ -16,6 +16,13 @@ public class AvailableState implements VinylState
   {
     //Nothing because it is available
   }
+/*
+  @Override public void onDelete(Vinyl vinyl)
+  {
+
+  }
+
+ */
 
   @Override public String stateMessage(Vinyl vinyl)
   {

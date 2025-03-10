@@ -1,6 +1,5 @@
 package Model;
 
-import java.beans.PropertyChangeSupport;
 import java.util.List;
 
 public class Vinyl
@@ -8,7 +7,6 @@ public class Vinyl
   private String title;
   private String artist;
   private int releaseYear;
-  private VinylState availableState, borrowedState, reservedState, borrowedReservedState;
   private VinylState currentState;
   private String borrowedUserId;
   private String reservedUserId;
@@ -93,6 +91,10 @@ public class Vinyl
     currentState.onReturn(this);
   }
 
+  public void onDelete(Vinyl vinyl){
+    //currentState.onDelete(this);
+  }
+
   public String stateMessage(){
     return currentState.stateMessage(this);
   }
@@ -103,10 +105,6 @@ public class Vinyl
     sb.append("title='").append(title).append('\'');
     sb.append(", artist='").append(artist).append('\'');
     sb.append(", releaseYear=").append(releaseYear);
-    sb.append(", availableState=").append(availableState);
-    sb.append(", borrowedState=").append(borrowedState);
-    sb.append(", reservedState=").append(reservedState);
-    sb.append(", borrowedReservedState=").append(borrowedReservedState);
     sb.append(", currentState=").append(currentState);
     sb.append(", borrowedUserId='").append(borrowedUserId).append('\'');
     sb.append(", reservedUserId='").append(reservedUserId).append('\'');

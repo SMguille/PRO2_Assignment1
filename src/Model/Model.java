@@ -21,7 +21,6 @@ public class Model implements PropertyChangeSubject
     vinylList.add(new Vinyl("Led Zeppelin IV", "Led Zeppelin", 1971));
     vinylList.add(new Vinyl("Rumours", "Fleetwood Mac", 1977));
     vinylList.add(new Vinyl("The Wall", "Pink Floyd", 1979));
-
   }
 
   public List<Vinyl> getVinylList()
@@ -34,7 +33,7 @@ public class Model implements PropertyChangeSubject
     support.firePropertyChange("listChanged", null, vinylList);
 }
 
-  public void removeVinyl(Vinyl vinyl, String removingUserId)
+  public synchronized void removeVinyl(Vinyl vinyl, String removingUserId)
   {
     if (vinyl.getCurrentState().toString().equals("AvailableState")
         || vinyl.getCurrentState().toString().equals("ReservedState") && vinyl.getReservedUserId().equals(removingUserId))
@@ -43,9 +42,10 @@ public class Model implements PropertyChangeSubject
       vinylList.remove(vinyl); //Anyone or the user that has reserved the vinyl can remove a vinyl that is in the store (It is still in the shop so he cannot steal it)
       support.firePropertyChange("listChanged", null, vinylList);
     }
+    vinyl.onDelete(vinyl);
 }
 
-  public void reserveVinyl(Vinyl vinyl, String userId){
+  public synchronized void reserveVinyl(Vinyl vinyl, String userId){
     if (vinyl.getCurrentState().toString().equals("AvailableState") //if available
         || vinyl.getCurrentState().toString().equals("BorrowedState") //if borrowed (it changes to borrowedState since im using states)
         || vinyl.getCurrentState().toString().equals("BorrowedReservedState")
@@ -65,7 +65,7 @@ public class Model implements PropertyChangeSubject
     support.firePropertyChange("listChanged", null, vinylList);
   }
 
-  public void borrowVinyl(Vinyl vinyl, String userId)
+  public synchronized void borrowVinyl(Vinyl vinyl, String userId)
   {
     if (vinyl.getCurrentState().toString().equals("AvailableState") //if it is available change directly
         || vinyl.getCurrentState().toString().equals("ReservedState")
@@ -77,7 +77,7 @@ public class Model implements PropertyChangeSubject
     }
   }
 
-  public void returnVinyl(Vinyl vinyl, String userId){
+  public synchronized void returnVinyl(Vinyl vinyl, String userId){
     if((vinyl.getCurrentState().toString().equals("BorrowedState") || vinyl.getCurrentState().toString().equals("BorrowedReservedState")) //if it is borrowed, the person that is borrowing can return the vinyl
         && vinyl.getBorrowedUserId().equals(userId)){
       vinyl.onReturn();

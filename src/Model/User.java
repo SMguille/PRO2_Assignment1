@@ -1,5 +1,8 @@
 package Model;
 
+import java.beans.PropertyChangeEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class User implements Runnable
@@ -7,10 +10,10 @@ public class User implements Runnable
   private String name;
   private Model model;
 
-  public User(String name)
+  public User(String name, Model model)
   {
     this.name = name;
-    this.model = new Model();
+    this.model = model;
   }
 
   public String getName()
@@ -18,33 +21,34 @@ public class User implements Runnable
     return name;
   }
 
-  public void setName(String name)
-  {
-    this.name = name;
-  }
 
   @Override public void run()
   {
     while (true)
     {
       Random random = new Random();
-      int option = random.nextInt(2) + 1;
-      int vinylsSize = model.getVinylList().size();
-      int selectedVinyl = random.nextInt(vinylsSize);
+      int option = random.nextInt(3) + 1;
+      int selectedVinyl = random.nextInt(model.getVinylList().size());
+      Vinyl vinyl = model.getVinylList().get(selectedVinyl);
 
+      try
+      {
+        Thread.sleep(random.nextInt(50) + 100);
+      }
+      catch (InterruptedException e)
+      {
+        throw new RuntimeException(e);
+      }
       switch (option)
       {
         case 1:
-          model.reserveVinyl(model.getVinylList().get(selectedVinyl),
-              this.getName());
+          model.reserveVinyl(vinyl, this.getName());
           break;
         case 2:
-          model.borrowVinyl(model.getVinylList().get(selectedVinyl),
-              this.getName());
+          model.borrowVinyl(vinyl, this.getName());
           break;
         case 3:
-          model.returnVinyl(model.getVinylList().get(selectedVinyl),
-              this.getName());
+          model.returnVinyl(vinyl, this.getName());
           break;
       }
     }
