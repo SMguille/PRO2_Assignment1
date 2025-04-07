@@ -48,21 +48,5 @@ public class Main extends Application
     for (Thread thread : threads){
       thread.start();
     }
-
-
-    /*
-    Thread thread2 = new Thread(user2);
-    Thread thread3 = new Thread(user3);
-    Thread thread4 = new Thread(user4);
-
-    thread2.setDaemon(true);
-    thread3.setDaemon(true);
-    thread4.setDaemon(true);
-
-    thread2.start();
-    thread3.start();
-    thread4.start();
-
-     */
   }
 }
